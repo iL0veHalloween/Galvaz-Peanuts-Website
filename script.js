@@ -15,6 +15,8 @@
        4. Mobile menu button (hamburger)
        5. Building the product cards from a data array
        6. Contact form validation
+       7. Store locator (map + list)
+       8. Scroll animations
 
    If something here does nothing, press F12 -> Console and look
    for a red error. A red error stops the rest of the file from running.
@@ -186,11 +188,17 @@ if (productGrid) {
     // Start from empty so the hard-coded cards do not appear twice.
     productGrid.innerHTML = "";
 
-    for (const product of products) {
+    for (let i = 0; i < products.length; i++) {
+
+        const product = products[i];
 
         // Create the card container.
         const card = document.createElement("div");
         card.className = "product-card";
+
+        // Fade it in when it scrolls into view, one card after another.
+        card.classList.add("reveal");
+        card.style.setProperty("--delay", i * 90 + "ms");
 
         // Create the peanut emoji block.
         const image = document.createElement("div");
@@ -309,9 +317,15 @@ const storeList = document.getElementById("store-list");
 
 if (storeList) {
 
-    for (const store of stores) {
+    for (let i = 0; i < stores.length; i++) {
+
+        const store = stores[i];
 
         const item = document.createElement("li");
+
+        // Rows fade in one after another as the list is reached.
+        item.classList.add("reveal");
+        item.style.setProperty("--delay", i * 40 + "ms");
 
         const address = document.createElement("span");
         address.className = "store-address";
@@ -386,4 +400,48 @@ if (mapElement && typeof L !== "undefined") {
 
     // Zoom so all pins fit on screen at once.
     map.fitBounds(bounds, { padding: [30, 30] });
+}
+
+
+/* ------------------------------------------------------------
+   8. SCROLL ANIMATIONS
+
+   Elements with class="reveal" start invisible (style.css).
+   Here we watch each one and add .is-visible the first time it
+   scrolls into view, which plays the fade-up animation.
+
+   This must run AFTER the cards and store rows are built above,
+   so it is the last section in the file.
+   ------------------------------------------------------------ */
+
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+
+    /* IntersectionObserver is a browser feature that reports when
+       an element enters the visible part of the page, so we do not
+       have to listen to scrolling ourselves. */
+    const observer = new IntersectionObserver((entries) => {
+
+        for (const entry of entries) {
+
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                // Stop watching it: the animation only plays once.
+                observer.unobserve(entry.target);
+            }
+        }
+
+    }, { threshold: 0.15 });   // 15% of the element on screen = trigger
+
+    for (const item of revealItems) {
+        observer.observe(item);
+    }
+
+} else {
+
+    // Very old browser: no animation, just show everything.
+    for (const item of revealItems) {
+        item.classList.add("is-visible");
+    }
 }
