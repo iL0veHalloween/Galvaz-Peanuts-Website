@@ -1,0 +1,545 @@
+/* ============================================================
+   style.css  -  how the Galvaz Peanuts page LOOKS
+   ============================================================
+
+   Organised top to bottom, in the same order as index.html:
+
+       1. Colours and base settings
+       2. Navigation bar
+       3. Hero (the big opening section)
+       4. Products
+       5. About
+       6. Contact form
+       7. Footer
+       8. Mobile screens
+
+   A rule looks like:   selector { property: value; }
+   The selector is the class from your HTML, e.g. ".hero".
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1. COLOURS AND BASE SETTINGS
+
+   Variables store a colour once and reuse it everywhere.
+   Change --brown here and the whole site updates.
+   ------------------------------------------------------------ */
+
+:root {
+    --cream: #F1E8D9;        /* page background */
+    --cream-light: #FFFDF8;  /* card background */
+    --brown: #79512E;        /* main brand colour */
+    --brown-dark: #5A3B20;   /* hover / footer */
+    --ink: #3B2A1A;          /* main text */
+    --muted: #6B5440;        /* secondary text */
+}
+
+/* Removes the browser's default spacing so we control it ourselves. */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    /* Links glide instead of jumping (CSS version of the JS smooth scroll). */
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Headings use a serif font for a more classic, "brand" feel. */
+h1, h2, h3 {
+    margin: 0 0 16px;
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.15;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* Stops the sticky navbar covering the top of each section when you jump to it. */
+section {
+    scroll-margin-top: 80px;
+}
+
+
+/* ------------------------------------------------------------
+   2. NAVIGATION BAR
+   ------------------------------------------------------------ */
+
+.navbar {
+    /* sticky = stays at the top while you scroll */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    padding: 18px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(121, 81, 46, 0.15);
+}
+
+.logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brown-dark);
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    padding-bottom: 4px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+/* .active is added by script.js for the section you are viewing. */
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--brown);
+    border-bottom-color: var(--brown);
+}
+
+/* Hidden on desktop, shown on phones (rule 8). */
+.menu-toggle {
+    display: none;
+}
+
+
+/* ------------------------------------------------------------
+   3. HERO
+   Two columns: text on the left, image on the right.
+   ------------------------------------------------------------ */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 40px;
+}
+
+.subtitle {
+    margin-bottom: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brown);
+}
+
+.hero h1 {
+    /* clamp(min, ideal, max) = scales with screen width, never too small or big. */
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    margin-bottom: 24px;
+}
+
+.hero-description {
+    max-width: 44ch;
+    margin-bottom: 32px;
+    font-size: 1.05rem;
+    color: var(--muted);
+}
+
+.main-button {
+    display: inline-block;
+    padding: 16px 30px;
+    background-color: var(--brown);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.main-button:hover {
+    background-color: var(--brown-dark);
+    transform: translateY(-2px);
+}
+
+.hero-image img {
+    width: 100%;
+    /* Keeps the image the same shape whatever size loads. */
+    aspect-ratio: 7 / 6;
+    object-fit: cover;
+    box-shadow: 0 24px 48px rgba(90, 59, 32, 0.18);
+}
+
+
+/* ------------------------------------------------------------
+   4. PRODUCTS
+   ------------------------------------------------------------ */
+
+.products {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+}
+
+.section-heading {
+    max-width: 640px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.product-grid {
+    display: grid;
+    /* auto-fit + minmax: as many columns as fit, each at least 220px. */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    padding: 28px 24px;
+    text-align: center;
+    background-color: var(--cream-light);
+    border: 1px solid rgba(121, 81, 46, 0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 34px rgba(90, 59, 32, 0.14);
+}
+
+.product-image {
+    margin-bottom: 18px;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.product-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+}
+
+.product-card p {
+    /* flex-grow pushes the button to the bottom of every card. */
+    flex-grow: 1;
+    margin: 0 0 20px;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.product-button {
+    align-self: center;
+    padding: 10px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brown);
+    border: 1px solid var(--brown);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.product-button:hover {
+    background-color: var(--brown);
+    color: #ffffff;
+}
+
+/* Single-product page (flavor-one.html, flavor-two.html, ...) */
+.product-detail {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.product-detail .product-image {
+    font-size: 4rem;
+}
+
+.product-detail p {
+    margin-bottom: 28px;
+    color: var(--muted);
+}
+
+
+/* ------------------------------------------------------------
+   5. ABOUT
+   Full-width brown band for contrast.
+   ------------------------------------------------------------ */
+
+.about {
+    padding: 96px 40px;
+    background-color: var(--brown);
+    text-align: center;
+}
+
+.about-content {
+    max-width: 660px;
+    margin: 0 auto;
+}
+
+/* Lighter gold on the brown background, so the label stays readable. */
+.about .subtitle {
+    color: #E9C79B;
+}
+
+.about h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: #FFF8EC;
+}
+
+.about p {
+    color: #EADCC6;
+}
+
+
+/* ------------------------------------------------------------
+   6. CONTACT FORM
+   ------------------------------------------------------------ */
+
+.contact {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 90px 40px;
+    text-align: center;
+}
+
+.contact > p {
+    color: var(--muted);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 30px;
+    text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font: inherit;
+    color: var(--ink);
+    background-color: var(--cream-light);
+    border: 1px solid rgba(121, 81, 46, 0.25);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid var(--brown);
+    outline-offset: 1px;
+}
+
+.contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Empty space reserved for the success/error message from script.js. */
+#form-message {
+    min-height: 24px;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brown-dark);
+}
+
+.contact-form .main-button {
+    align-self: center;
+}
+
+
+/* ------------------------------------------------------------
+   STORE LOCATOR
+   ------------------------------------------------------------ */
+
+.locations {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+}
+
+.map {
+    position: relative;
+    /* z-index 0 keeps Leaflet's zoom buttons under the sticky navbar */
+    z-index: 0;
+    height: 420px;
+    margin-bottom: 36px;
+    border: 1px solid rgba(121, 81, 46, 0.15);
+}
+
+.store-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.store-list li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(121, 81, 46, 0.15);
+    font-size: 0.92rem;
+}
+
+.store-address {
+    color: var(--ink);
+}
+
+.store-directions {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
+    border-bottom: 1px solid var(--brown);
+}
+
+.store-directions:hover {
+    color: var(--brown-dark);
+    border-bottom-color: var(--brown-dark);
+}
+
+
+/* ------------------------------------------------------------
+   7. FOOTER
+   ------------------------------------------------------------ */
+
+.footer {
+    padding: 48px 24px;
+    background-color: #34240F;
+    text-align: center;
+}
+
+.footer h3 {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    color: #FFF6E6;
+}
+
+.footer p {
+    margin: 6px 0;
+    font-size: 0.85rem;
+    color: #CDBBA2;
+}
+
+
+/* ------------------------------------------------------------
+   8. MOBILE SCREENS
+   Everything inside @media only applies below that width.
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    /* Hero becomes one column instead of two. */
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 60px 24px;
+    }
+
+    .products,
+    .contact {
+        padding: 64px 24px;
+    }
+
+    .locations {
+        padding: 64px 24px;
+    }
+
+    .map {
+        height: 340px;
+    }
+
+    .about {
+        padding: 72px 24px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 16px 20px;
+    }
+
+    /* Show the hamburger button. */
+    .menu-toggle {
+        display: block;
+        padding: 4px 8px;
+        background: none;
+        border: none;
+        font-size: 1.6rem;
+        line-height: 1;
+        color: var(--brown-dark);
+        cursor: pointer;
+    }
+
+    /* The menu is hidden until .open is added by script.js. */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 20px 16px;
+        background-color: #ffffff;
+        border-bottom: 1px solid rgba(121, 81, 46, 0.15);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(121, 81, 46, 0.12);
+    }
+}

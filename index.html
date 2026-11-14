@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Galvaz Peanuts Co. | Fresh & Delicious</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet: free map library, no API key needed -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <a href="#" class="logo">Galvaz Peanuts Co.</a>
+
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#products">Our Peanuts</a>
+            <a href="#about">About Us</a>
+            <a href="#locations">Locations</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Only visible on phones; script.js opens and closes the menu -->
+        <button class="menu-toggle" type="button" aria-label="Open menu">☰</button>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="subtitle">LOCALLY AVAILABLE</p>
+
+            <h1>A BETTER KIND<br>OF CRUNCH.</h1>
+
+            <p class="hero-description">
+                Four flavors. One irresistible snack.
+                Discover your new favorite peanuts.
+            </p>
+
+            <a href="#products" class="main-button">
+                EXPLORE OUR FLAVORS
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+            <img
+                src="https://placehold.co/700x600/F1E8D9/79512E?text=Peanut+Product+Photography"
+                alt="Our delicious peanuts">
+        </div>
+
+    </section>
+
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+
+        <div class="section-heading">
+            <p class="subtitle">OUR COLLECTION</p>
+            <h2>Find Your Favorite</h2>
+            <p>Four delicious flavors, made for every craving.</p>
+        </div>
+
+        <div class="product-grid">
+
+            <div class="product-card">
+                <div class="product-image">🥜</div>
+                <h3>Flavor One</h3>
+                <p>Discover our first delicious flavor.</p>
+                <a href="#contact" class="product-button">
+                    Learn More
+                </a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥜</div>
+                <h3>Flavor Two</h3>
+                <p>Discover our second delicious flavor.</p>
+                <a href="#contact" class="product-button">
+                    Learn More
+                </a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥜</div>
+                <h3>Flavor Three</h3>
+                <p>Discover our third delicious flavor.</p>
+                <a href="#contact" class="product-button">
+                    Learn More
+                </a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥜</div>
+                <h3>Flavor Four</h3>
+                <p>Discover our fourth delicious flavor.</p>
+                <a href="#contact" class="product-button">
+                    Learn More
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About Section -->
+    <section class="about" id="about">
+
+        <div class="about-content">
+            <p class="subtitle">OUR STORY</p>
+
+            <h2>Simple. Delicious. Local.</h2>
+
+            <p>
+                We believe a great snack doesn't need to be complicated.
+                Discover our selection of delicious peanuts and find
+                the perfect flavor for you.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- Locations Section -->
+    <section class="locations" id="locations">
+
+        <div class="section-heading">
+            <p class="subtitle">STORE LOCATOR</p>
+            <h2>Where to Buy</h2>
+            <p>Find our peanuts at these local stores around Los Angeles.</p>
+        </div>
+
+        <!-- Leaflet draws the map inside this div -->
+        <div id="map" class="map"></div>
+
+        <!-- script.js fills this list from the same store data as the map -->
+        <ul class="store-list" id="store-list"></ul>
+
+    </section>
+
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+
+        <p class="subtitle">GET IN TOUCH</p>
+
+        <h2>Ready for a Crunch?</h2>
+
+        <p>
+            Interested in trying our peanuts?
+            Learn if our products are available in your area, or contact us for wholesale inquiries.
+        </p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <h3>Galvaz Peanuts Co.</h3>
+
+        <p>Goodness in every crunch.</p>
+
+        <p>© <span id="year"></span> Galvaz Peanuts Co. All rights reserved.</p>
+
+    </footer>
+
+</body>
+</html>
